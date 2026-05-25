@@ -1,0 +1,22 @@
+# POST http://localhost:5600/api/todos
+# Content-Type:application/json
+
+# {
+#   "text": "Finish MERN app #2 to DELETE url HTTP/1.1"
+# }
+
+# GET http://localhost:5600/api/todos
+# Content-Type: application/json
+
+
+# PUT http://localhost:5600/api/todos/6a12874dbbb48c93119ade7b
+# Content-Type: application/json
+
+# {
+#   "text": "Finish notebook todo app update",
+#   "completed": true
+# }
+
+
+# DELETE http://localhost:5600/api/todos/6a128828bbb48c93119ade7c
+# Content-Type: application/json

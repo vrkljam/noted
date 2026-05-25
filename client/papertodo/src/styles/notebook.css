@@ -1,0 +1,616 @@
+:root {
+  /* LIGHT MODE MARBLE COUNTERTOP */
+  --bg: #f4f4f6;
+  --marble-vein-1: #c8c8cf; /* Darkened this line for much sharper veining */
+  --marble-vein-2: #dcdee5; /* Darkened secondary feathering */
+
+  --paper: #fffef8;
+  --ink: #1d3557;
+  --ink-secondary: #243b55;
+  --line: #9ec5fe;
+}
+.dark-mode {
+  --bg: #12161a;
+  --marble-vein-1: rgba(35, 43, 51, 0.8);
+  --marble-vein-2: rgba(55, 65, 75, 0.4);
+
+  --paper: #1f2937;
+  --ink: #f3e9d2;
+  --ink-secondary: #e0d4be;
+  --line: rgba(147, 197, 253, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  /* HIGH-CONTRAST MARBLE VEINING EFFECTS */
+  background: 
+    /* Sharp main accent vein */
+    linear-gradient(
+      130deg,
+      transparent 48%,
+      var(--marble-vein-1) 50%,
+      var(--marble-vein-2) 51%,
+      transparent 54%
+    ),
+    /* Cross-cutting secondary thin vein */
+    linear-gradient(
+        45deg,
+        transparent 22%,
+        var(--marble-vein-2) 24%,
+        var(--marble-vein-1) 25%,
+        transparent 27%
+      ),
+    /* Third feathering vein for natural asymmetry */
+    linear-gradient(
+        115deg,
+        transparent 75%,
+        var(--marble-vein-1) 77%,
+        transparent 80%
+      ),
+    /* Solid background floor base */ var(--bg);
+
+  /* Mixes a granular stone surface feeling on top of the sharp veins */
+  background-image:
+    linear-gradient(
+      130deg,
+      transparent 48%,
+      var(--marble-vein-1) 50%,
+      var(--marble-vein-2) 51%,
+      transparent 54%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 22%,
+      var(--marble-vein-2) 24%,
+      var(--marble-vein-1) 25%,
+      transparent 27%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 75%,
+      var(--marble-vein-1) 77%,
+      transparent 80%
+    ),
+    url("https://www.transparenttextures.com/patterns/parian-marble.png");
+
+  overflow-x: hidden;
+  font-family: "Patrick Hand", cursive;
+}
+
+/* BACKGROUND */
+
+.app-background {
+  min-height: 100vh;
+
+  padding: clamp(20px, 5vw, 50px);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* PAPER */
+
+.paper {
+  position: relative;
+
+  width: min(100%, 750px);
+
+  min-height: 100vh;
+
+  padding: clamp(50px, 6vw, 80px) clamp(20px, 5vw, 60px) clamp(50px, 6vw, 80px)
+    clamp(50px, 8vw, 90px);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--paper) 0px,
+    var(--paper) 34px,
+    var(--line) 35px
+  );
+
+  border-radius: 12px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+  transform: rotate(-0.5deg);
+
+  transition: 0.3s ease;
+}
+
+/* RED MARGIN LINE */
+
+.paper::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: clamp(40px, 8vw, 70px);
+
+  width: 3px;
+
+  background: rgba(255, 0, 0, 0.4);
+}
+
+/* PAPER SHADOW DEPTH */
+
+.paper::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 12px;
+
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+
+  opacity: 0.18;
+
+  pointer-events: none;
+
+  mix-blend-mode: multiply;
+}
+
+/* TITLE */
+
+.title {
+  font-family: "Caveat", cursive;
+
+  font-size: clamp(3rem, 9vw, 5rem);
+
+  line-height: 1.1;
+
+  color: var(--ink) !important;
+
+  margin-bottom: 30px;
+
+  transform: rotate(-1deg);
+}
+
+/* FORM */
+
+.todo-form {
+  display: flex;
+
+  gap: 1rem;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+
+.task-input {
+  flex: 1;
+
+  min-height: 50px;
+
+  font-family: "Caveat", cursive !important;
+
+  font-size: clamp(1.5rem, 5vw, 2.2rem) !important;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.5px;
+
+  color: var(--ink) !important;
+
+  background: transparent !important;
+
+  border: none !important;
+
+  box-shadow: none !important;
+
+  padding-left: 0 !important;
+
+  margin-bottom: 0;
+}
+
+.task-input:focus {
+  outline: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 2px dashed var(--line) !important; /* Visual indicator that you're typing */
+  transform: scale(1.01);
+  transition: transform 0.2s ease;
+}
+
+/* TODO ITEM */
+
+.todo-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 12px 0;
+
+  animation: writeIn 0.3s ease;
+}
+
+/* TODO TEXT */
+
+.todo-text {
+  font-family: "Caveat", cursive;
+
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+
+  line-height: 1.4;
+
+  color: var(--ink);
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  user-select: none;
+
+  word-break: break-word;
+
+  flex: 1;
+}
+
+.todo-text:hover {
+  transform: translateX(4px);
+}
+
+/* COMPLETED TASK ANIMATION */
+
+.completed {
+  text-decoration: line-through;
+
+  text-decoration-thickness: 2px;
+
+  text-decoration-color: rgba(29, 53, 87, 0.7);
+
+  opacity: 0.45;
+
+  transform: rotate(-2deg);
+
+  animation: completeTask 0.35s ease;
+}
+
+/* DELETE BUTTON */
+
+.btn-danger {
+  border-radius: 8px !important; /* Looks more like an eraser bar */
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  font-family: sans-serif;
+  font-weight: bold;
+  background: #bc434d !important;
+  box-shadow: inset -2px -2px 0px rgba(0, 0, 0, 0.2); /* Gives it a rubbery 3D depth */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-danger:hover {
+  background: #d90429 !important;
+  transform: rotate(15deg) scale(1.1); /* Fun little twist when hovered */
+}
+
+/* WRITING ANIMATION */
+
+@keyframes writeIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(6px) rotate(-1deg);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .paper {
+    min-height: auto;
+  }
+
+  .todo-form {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .todo-form button {
+    width: 100%;
+  }
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 480px) {
+  .paper {
+    border-radius: 0;
+
+    min-height: 100vh;
+  }
+
+  .todo-item {
+    align-items: flex-start;
+  }
+
+  .btn-danger {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+  }
+}
+/* CHECKBOX */
+
+.task-check {
+  appearance: none; /* Strip away generic browser checkbox */
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper) !important;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  transform: rotate(-3deg);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.task-check:hover {
+  transform: scale(1.1) rotate(-3deg);
+  /* background: transparent; */
+}
+
+@keyframes completeTask {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.02) rotate(-1deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 0.45;
+  }
+}
+
+.theme-toggle {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(-10deg);
+}
+
+.task-check:checked::before {
+  content: "✓";
+  position: absolute;
+  top: -6px;
+  left: 2px;
+  font-size: 1.6rem;
+  color: #e63946; /* Bright red ink for checkmarks pops great against the blue lines */
+  font-family: "Caveat", cursive;
+  font-weight: bold;
+}
+
+.task-check:checked::before {
+  content: "✓";
+  position: absolute;
+  /* Adjusted positioning to keep it centered */
+  top: -7px;
+  left: 2px;
+
+  font-size: 1.6rem;
+  font-family: "Caveat", cursive;
+  font-weight: bold;
+
+  /* Bright red checkmark for light mode, light coral/pink for dark mode so it pops */
+  color: #e63946;
+}
+
+.dark-mode .task-check:checked::before {
+  color: #ff4d6d;
+}
+
+/* FORCE RESET ALL FOCUS STATES FOR THE CHECKBOX */
+.task-check:focus,
+.task-check:active,
+.task-check:focus-visible,
+.task-check:checked:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: var(--paper) !important;
+  border: 2px solid var(--ink) !important;
+}
+
+/* ENSURE THE CHECKMARK ALWAYS STAYS ON TOP */
+.task-check:checked::before {
+  content: "✓" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 999 !important; /* Forces the checkmark to stay on top of any focus rings */
+  top: -7px !important;
+  left: 2px !important;
+  font-size: 1.6rem !important;
+  font-family: "Caveat", cursive !important;
+  font-weight: bold !important;
+}
+.todo-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* THE ULTIMATE DARK MODE COLOR OVERRIDE */
+.dark-mode .todo-text,
+.dark-mode .todo-text.completed,
+.dark-mode span.completed {
+  color: var(--ink) !important;
+  text-decoration-color: var(
+    --ink
+  ) !important; /* This fixes the line-through color too! */
+}
+
+/* Fix completed task contrast in dark mode */
+.dark-mode .completed {
+  color: var(--ink) !important;
+  opacity: 0.75 !important; /* Bump up opacity so light ink stays highly visible against dark paper */
+  text-decoration-color: var(--ink) !important;
+}
+
+/* If the randomizer chose the secondary ink color, make sure it stays bright too */
+.dark-mode .todo-text {
+  color: var(--ink) !important;
+}
+
+/* Show a handwritten watermark when there are no todos */
+.mt-4:empty::after {
+  content: "Nothing left to do! ✨";
+  display: block;
+  font-family: "Caveat", cursive;
+  font-size: 2.5rem;
+  color: var(--ink);
+  opacity: 0.8;
+  text-align: center;
+  padding-top: 50px;
+}
+/* NAVBAR CONTAINER (GLASS EFFECT) */
+.navbar {
+  /* Subtle light frosting in light mode / deep obsidian frosting in dark mode */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-bottom: 2px solid var(--marble-vein-1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Keeps it floating cleanly above everything when scrolling */
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* DARK MODE NAVBAR ADJUSTMENT */
+.dark-mode .navbar {
+  background: rgba(18, 22, 26, 0.65);
+  border-bottom: 2px solid var(--marble-vein-1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* LOGO AND BRANDING */
+.logo-text {
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
+  color: var(--ink);
+  font-weight: bold;
+}
+
+/* CENTER GREETINGS */
+.navbar-greeting {
+  font-family: "Caveat", cursive;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.welcome-user {
+  color: var(--ink);
+}
+
+.welcome-guest {
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+/* AUTH BADGE (LOGGED OUT STATUS) */
+.auth-status-badge {
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.1rem;
+  color: var(--ink);
+  opacity: 0.7;
+  border: 1px dashed var(--ink);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* NAVIGATION BUTTONS */
+.btn-nav {
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.05rem;
+  padding: 5px 16px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-nav:hover {
+  transform: translateY(-1px);
+  background: var(--bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-nav:active {
+  transform: translateY(1px);
+}
+
+.nav-theme-toggle {
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+  transition: transform 0.2s ease;
+}
+
+.nav-theme-toggle:hover {
+  transform: scale(1.15) rotate(-12deg);
+}
