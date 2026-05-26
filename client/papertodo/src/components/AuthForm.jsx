@@ -38,6 +38,15 @@ function AuthForm() {
 
   return (
     <div className="auth-container py-4">
+      <div>
+        {/* TEMPORARY DEBUG LINE */}
+        <p style={{ color: "red", background: "yellow", padding: "10px" }}>
+          Debug URL:{" "}
+          {import.meta.env.VITE_BACKEND_URL || "Using Local Fallback"}
+        </p>
+
+        {/* The rest of your registration form... */}
+      </div>
       <h2 className="auth-title mb-4">
         {isLoginView ? "Sign In" : "Create Account"}
       </h2>
