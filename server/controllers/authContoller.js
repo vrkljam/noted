@@ -38,7 +38,8 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({ token, username: user.username });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    setError(err.response?.data?.message || err.message || "Unknown Error");
+    // res.status(500).json({ message: error.message });
   }
 };
 
