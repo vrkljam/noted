@@ -29,10 +29,11 @@ function AuthForm() {
       }
     } catch (err) {
       // Capture custom backend error message if available
-      setError(
-        err.response?.data?.message ||
-          "Something went wrong. Please try again.",
-      );
+      // setError(
+      //   err.response?.data?.message ||
+      //     "Something went wrong. Please try again.",
+      // );
+      setError(err.response?.data?.message || err.message || "Unknown Error");
     }
   };
 
