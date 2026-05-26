@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || "http://localhost:5600/api",
+  baseURL: import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:5600/api",
 });
 
 export default API;
