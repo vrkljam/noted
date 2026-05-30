@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
 
   // LOGIN FUNCTION
   const login = async (username, password) => {
-    const response = await API.post("/api/auth/login", { username, password });
+    const response = await API.post("/auth/login", { username, password });
     const { token, username: loggedInUser } = response.data;
 
     localStorage.setItem("token", token);
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
 
   // REGISTER FUNCTION
   const register = async (username, password) => {
-    const response = await API.post("/api/auth/register", {
+    const response = await API.post("/auth/register", {
       username,
       password,
     });

@@ -25,7 +25,6 @@ function TodoItem({ todo, deleteTodo, toggleComplete, updateTodo }) {
       {isEditing ? (
         <input
           className="task-input"
-          style={rotationStyle}
           value={editText}
           autoFocus
           onChange={(e) => setEditText(e.target.value)}
@@ -40,18 +39,21 @@ function TodoItem({ todo, deleteTodo, toggleComplete, updateTodo }) {
         />
       ) : (
         <div className="todo-content d-flex align-items-center flex-grow-1">
-          <input
-            type="checkbox"
-            className="task-check"
-            checked={todo.completed}
-            onClick={(e) => e.stopPropagation()} // Captures the click event early
-            onChange={() => toggleComplete(todo)} // Handles the functional state change
-          />
           <span
             className={`todo-text ${todo.completed ? "completed" : ""}`}
             style={rotationStyle}
-            onClick={() => setIsEditing(true)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsEditing(true);
+            }}
           >
+            <input
+              type="checkbox"
+              className="task-check"
+              checked={todo.completed}
+              onClick={(e) => e.stopPropagation()} // Captures the click event early
+              onChange={() => toggleComplete(todo)} // Handles the functional state change
+            />
             {todo.text}
           </span>
         </div>
